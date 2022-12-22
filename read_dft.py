@@ -10,6 +10,8 @@
 #            L DFT_data - xyz_relaxed - *.xyz
 #                       L dft_info.csv
 
+## 随便加一点东西，测试一下上传github.
+
 import os
 import pandas as pd 
 
