@@ -1,18 +1,19 @@
 '''
 Author: Xueao Li @ DUT
-Date: 2022-12-13 20:20:48
+Date: 2022-12-22 14:56:59
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2022-12-20 14:59:15
-Description: 本脚本面向Linux系统。
+LastEditTime: 2022-12-22 17:21:04
+Description: The description of this script.
 
-Copyright (c) 2022 by li xueao 11076446+li-xueao@user.noreply.gitee.com, All Rights Reserved. 
+Copyright (c) 2022 by li xueao 1096183069@qq.com, All Rights Reserved. 
 '''
+
 from ase.db import connect
 from ase import Atoms
 import os, sys, sqlite3, csv
 import pandas as pd
 
-#db = connect("DATABASE.db")
+#db = connect("DATABASE.db")  
 #update_csv = r'C:\Users\dell\Desktop\团簇数据库_output\simple\Ag\DFT_data\dft_info.csv'
 update_csv = "dft_info.csv"
 ##f2 = pd.read_csv(update_csv,header=0)
