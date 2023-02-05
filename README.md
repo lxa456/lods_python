@@ -42,7 +42,7 @@ ASE database 自带
 
 ## 使用方法
 
-#### 使用前准备
+#### step 0. 使用前准备
 
 - DFT计算结果文件夹，里面包含多个DFT输出，如OUTCAR、EIGENVAL等
 
@@ -50,24 +50,33 @@ ASE database 自带
 
 - 初始目录结构示例：
 
-  `DFT`
-  `├── Ag`
-  `│   ├── 01`
-  `│   │   ├── OUTCAR`
+  DFT
 
-  `│   │   └── *`
+  ├── Ag
 
-  `│   ├── 02`
-  `│   │   ├── OUTCAR`
-  `│   │   └── *`
+  │   ├── 01
+
+  │   │   ├── OUTCAR
+
+  │   │   └── *
+
+  │   ├── 02
+
+  │   │   ├── OUTCAR
+
+  │   │   └── *
 
 #### step 1. 处理DFT输出文件
 
 - ​	read_dft.py
+
 - 处理后：
+
 - Ag - DFT
+
      └── DFT_data──  xyz_relaxed──  *.xyz
-              └──dft_info.csv
+
+  ​            └──dft_info.csv
 
 #### step 2. 筛选
 
@@ -79,17 +88,20 @@ ASE database 自带
 
 - Ag
 
-- ├── DFT
+  ├── DFT
 
   ├── DFT_data
 
   ​    └── xyz_relaxed
 
   └── DFT_data_screen
-      └── xyz_relaxed
+
+  ​    └── xyz_relaxed
 
   ​        ├── similarity.csv
+
   ​        ├── dft_data_not_exist.csv
+
   ​        └── dft_data_exist.csv
 
   
