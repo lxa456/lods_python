@@ -6,7 +6,7 @@ LODS(Low-Dimensional Systems)数据库管理脚本
 
 ASE database 自带
 
-| Keys       | Desciption                         | data type        |
+| Keys       | Description                        | data type        |
 | ---------- | ---------------------------------- | ---------------- |
 | formula    | Chemical formula                   | string           |
 | natoms     | Number of atoms                    | integer          |
@@ -22,7 +22,7 @@ ASE database 自带
 
 需要添加的
 
-| Keys        | Desciption                                                   | data type |
+| Keys        | Description                                                  | data type |
 | ----------- | ------------------------------------------------------------ | --------- |
 | filename    | original filename                                            | string    |
 | Functional  | Functional type                                              | string    |
