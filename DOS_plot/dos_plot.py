@@ -37,7 +37,6 @@ def run_vaspkit():
 
     for directory in directories:
         os.chdir(directory)
-        #subprocess.run(["vaspkit <cmd.in"])
         os.system("vaspkit < cmd.in")
         os.chdir("..")
 

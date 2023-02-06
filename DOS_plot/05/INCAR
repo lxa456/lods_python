@@ -1,0 +1,28 @@
+## opt
+   SYSTEM = BLACK
+   ICHARG = 2
+   ISTART = 0
+   ISYM   = 2
+   GGA    = PE
+#   IVDW   = 11
+#   LORBIT = 11
+   NCORE  = 16
+   PREC   = Normal
+   ENCUT  = 400 eV
+   ALGO   = Fast
+   EDIFF  = 1E-5
+   EDIFFG = -0.01
+   LREAL  = auto
+   ISIF   = 2
+   NELM   = 200
+   NELMIN = 2
+   NSW    = 1000
+   IBRION = 2
+      
+   ISMEAR = 0
+   SIGMA  = 0.05
+   
+   NWRITE = 2
+   LWAVE  = .FALSE.
+   LCHARG = .FALSE.
+
