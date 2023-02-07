@@ -10,7 +10,6 @@
 #            L DFT_data - xyz_relaxed - *.xyz
 #                       L dft_info.csv
 
-
 import os
 import pandas as pd 
 
@@ -109,9 +108,15 @@ class read_xyz():
     def PointGroup(self) -> str:
         import pymatgen.core as mg
         from pymatgen.symmetry.analyzer import PointGroupAnalyzer
-        structure = mg.Molecule.from_file(self.xyz_path)
-        finder = PointGroupAnalyzer(structure)
-        return finder.get_pointgroup()
+        try:
+            structure = mg.Molecule.from_file(self.xyz_path)
+            finder = PointGroupAnalyzer(structure)
+            #print(self.xyz_path, finder.get_pointgroup())
+            
+            
+            return finder.get_pointgroup()
+        except:
+            print(self.xyz_path)
     def Filename(self) -> str:
         filename = self.xyz_path.split('\\')[-1]
         return filename.split(".")[0]
@@ -133,16 +138,17 @@ def cut_path(dirname1, n) -> str:
 if __name__ == '__main__':
 
     ## 先CONTCAR -> *.xyz
-    dft_output_path = r"C:\Users\dell\Desktop\团簇数据库_output\simple\Ag\DFT"
+    dft_output_path = r"C:\Users\dell\Desktop\团簇数据库_output\simple\Zn2-20\DFT"
     dft_data = dft_output_path.replace("DFT", "DFT_data")
-    #for root, dirs, files in os.walk(dft_output_path):
-    #    for filename in files:
-    #        if filename == "CONTCAR":
-    #            contcar_path = os.path.join(root, filename)
-    #            xyz_dir = os.path.join(cut_path(contcar_path,2).replace("DFT","DFT_data"), "xyz_relaxed")
-    #            if not os.path.exists(xyz_dir):
-    #                os.makedirs(xyz_dir)
-    #            Vasp2xyz(vasp_path=contcar_path,xyz_dir=xyz_dir)
+    for root, dirs, files in os.walk(dft_output_path):
+        for filename in files:
+            if filename == "CONTCAR":
+                contcar_path = os.path.join(root, filename)
+                xyz_dir = os.path.join(cut_path(contcar_path,2).replace("DFT","DFT_data"), "xyz_relaxed")
+                if not os.path.exists(xyz_dir):
+                    os.makedirs(xyz_dir)
+                print(root)
+                Vasp2xyz(vasp_path=contcar_path,xyz_dir=xyz_dir)
 
 
     ## OUTCAR & EIGENVAL & CONTCAR(filename)

@@ -2,7 +2,7 @@
 Author: Xueao Li @ DUT
 Date: 2022-12-21 17:02:55
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2022-12-22 14:56:04
+LastEditTime: 2023-02-07 20:37:03
 Description: The description of this script.
 
 Copyright (c) 2022 by li xueao 11076446+li-xueao@user.noreply.gitee.com, All Rights Reserved. 
@@ -22,7 +22,7 @@ db_path = r"C:\Users\dell\Desktop\database_backups\DATABASE_backup\2022_6_4\DATA
 ## 相似度的上限，超过该值即判定为重复结构。
 similarity_value = 0.90
 
-dft_data_dir = r"C:\Users\dell\Desktop\团簇数据库_output\simple\Ag\DFT_data"
+dft_data_dir = r"C:\Users\dell\Desktop\团簇数据库_output\simple\Zn2-20\DFT_data"
 dft_data_screen_dir = dft_data_dir.replace("DFT_data","DFT_data_screen")
 dft_data_csv = os.path.join(dft_data_dir,"dft_info.csv")
 
@@ -68,9 +68,10 @@ for root, dirs, files in os.walk(dft_data_dir):
     for filename in files:
         if filename.endswith(".xyz"):
             xyz_path = os.path.join(root, filename)
+            print(filename)
             ## 该xyz文件在DATABASE.db中相同化学式结构的相似度
             _similarity = similarity(xyz_path,db_path)
-            filename_list.append(filename[:-4])
+            filename_list.append(filename)
 
             ## 重复的数据放在xyz_relaxed_existed中
             if type(_similarity) == float and _similarity > similarity_value: 
@@ -79,7 +80,7 @@ for root, dirs, files in os.walk(dft_data_dir):
                     os.makedirs(os.path.join(dft_data_screen_dir, "xyz_relaxed_existed"))
 
                 copy(xyz_path, xyz_relaxed_existed_path)
-                exist_xyz_index_list.append(filename_index(dft_data_csv,filename[:-4]))
+                exist_xyz_index_list.append(filename_index(dft_data_csv,filename.replace(".xyz",'')))
 
             elif type(_similarity) == float and _similarity < similarity_value :
                 xyz_relaxed_not_existed_path = os.path.join(dft_data_screen_dir, "xyz_relaxed", filename)
@@ -87,7 +88,7 @@ for root, dirs, files in os.walk(dft_data_dir):
                     os.makedirs(os.path.join(dft_data_screen_dir, "xyz_relaxed"))
                 copy(xyz_path, xyz_relaxed_not_existed_path)
                 similarity_list.append(str(_similarity)+' (Exist but not satisfied!)')
-                not_exist_xyz_index_list.append(filename_index(dft_data_csv,filename[:-4]))
+                not_exist_xyz_index_list.append(filename_index(dft_data_csv,filename.replace(".xyz",'')))
                 
             elif type(_similarity) == str :
                 xyz_relaxed_not_existed_path = os.path.join(dft_data_screen_dir, "xyz_relaxed", filename)
@@ -95,7 +96,7 @@ for root, dirs, files in os.walk(dft_data_dir):
                     os.makedirs(os.path.join(dft_data_screen_dir, "xyz_relaxed"))
                 copy(xyz_path, xyz_relaxed_not_existed_path)
                 similarity_list.append('Not Exist!')
-                not_exist_xyz_index_list.append(filename_index(dft_data_csv,filename[:-4]))
+                not_exist_xyz_index_list.append(filename_index(dft_data_csv,filename.replace(".xyz",'')))
 
 
 ## 保存相似度信息
