@@ -1,35 +1,28 @@
 '''
 Author: Xueao Li @ DUT
-Date: 2022-12-22 14:56:59
+Date: 2022-12-13 20:20:48
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2022-12-22 17:21:04
-Description: The description of this script.
+LastEditTime: 2023-02-08 17:40:37
+Description: 本脚本要在Linux系统执行。(因为手懒)
 
-Copyright (c) 2022 by li xueao 1096183069@qq.com, All Rights Reserved. 
+Copyright (c) 2022 by li xueao 11076446+li-xueao@user.noreply.gitee.com, All Rights Reserved. 
 '''
-
 from ase.db import connect
 from ase import Atoms
-import os, sys, sqlite3, csv
+import os
 import pandas as pd
 
-#db = connect("DATABASE.db")  
-#update_csv = r'C:\Users\dell\Desktop\团簇数据库_output\simple\Ag\DFT_data\dft_info.csv'
-update_csv = "dft_info.csv"
-##f2 = pd.read_csv(update_csv,header=0)
-#print(f2.head(1))
-#print(f2["filename"])
-#print(f2.head())
-#f3 = pd.read_csv(update_csv,header=1)
-current_path = os.path.split( os.path.realpath(sys.argv[0]))[0] #当前目录
 
-db_filename = "Ag.db"
+update_csv = '/mnt/c/Users/dell/Desktop/团簇数据库_output/simple/Si/DFT_data_screen/dft_data_not_exist.csv'
+
+db_filename = update_csv.replace("dft_data_not_exist.csv",update_csv.split("/")[-3]+".db")
+
 ## *.db文件中的所有key
 db_key = ["filename", "GAP_DFT","HOMO_DFT","LUMO_DFT","Point_Group"\
     ,"TOTEN","GAP_GW","HOMO_GW","LUMO_GW","Point_Group", "N_ele", "Max_Force"]
 
 ## pd.read_csv 没玩明白，先手动读csv
-f1 = open(update_csv)
+f1 = open(update_csv,"r")
 lines1 = f1.readlines()
 ## all KEY in csv file
 key_list = [] 
@@ -39,28 +32,31 @@ filename_list = []
 [filename_list.append(lines1[i].strip().split(",")[0]) for i in range(1, len(lines1))]
 
 
+def path_remake(path):
+    return path.replace(' ', '\ ').replace('(','\(').replace(')','\)').replace('&','\&')
+
 ## step 1. 按照csv中filename的顺序来convert所有*.xyz 文件成 .db
 xyz_path_list = []
 for name in filename_list:
-    for root, dirs, files in os.walk(current_path):
+    for root, dirs, files in os.walk(update_csv.replace("dft_data_not_exist.csv", 'xyz_relaxed')):
         for filename in files:
             if filename == name+".xyz" :
                 xyz_path = os.path.join(root, filename)
-                xyz_path_list.append(xyz_path)
+                remake_xyz = path_remake(xyz_path)
+                xyz_path_list.append(remake_xyz)
 
-#print(xyz_path_list)
 
 convert_cmd = ''
 for i in xyz_path_list:
     convert_cmd+=i+" "
-#print(convert_cmd)
 
-#os.system("ase convert "+convert_cmd+db_filename)
+
+if os.path.exists(db_filename):
+    os.remove(db_filename)
+os.system("ase convert "+convert_cmd+db_filename)
 
 db = connect(db_filename)
 ## step 2. 按row.id更新db中的keys and values
-#for row in db.select():
-    
 
 def index(list, value) -> int:
     """输入list和它包含的元素，
@@ -73,13 +69,13 @@ def index(list, value) -> int:
         else:
             i+=1
 
-#[x.append(i[0])  for i in data]
-#print(key_list)
 
 def update_Sequential(db_file, key, value_list):
+    '''not finished'''
     db = connect(db_file)
     for row in db.select():
         db.update(row.id, )
+    pass
 ## csv文件中的第一行是key。
 ## 检查key是否在 db_key 中。
 
