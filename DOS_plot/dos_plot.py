@@ -65,7 +65,7 @@ def eigenval_plot(eigenval_path,feimi_energy_path):
     lines2 = f2.readlines()
     fermi = float(lines2[1].split()[0])
     for i in energy:
-        plt.axvline(x = i-fermi,ymin=0,ymax=0.15,linestyle='-',lw=0.3, c="black")
+        plt.axvline(x = i-fermi,ymin=0,ymax=0.15,linestyle='-',lw=0.3, c="#b30b00")
 
 
 def png_name(poscar_path):
@@ -94,7 +94,7 @@ def vasp_formula(vasp_path):
 
 def save_png(text,save_path):
     plt.text(0.05, 0.90,s=text,fontdict={'family' : 'Arial', 'size':18}, transform=plt.gca().transAxes)
-    plt.axvline(x=0,ymin=0,ymax=1,linestyle='--',c="grey")
+    plt.axvline(x=0,ymin=0,ymax=1,linestyle='--',c="#a6a6a6")
     plt.xlabel("Energy (eV)",fontsize=15)
     plt.ylabel("Density of States (ev$^{-1}$)",fontsize=15)
     plt.ylim(bottom=0)
