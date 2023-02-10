@@ -2,7 +2,7 @@
 Author: Xueao Li @ DUT
 Date: 2022-12-13 20:20:48
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-08 17:40:37
+LastEditTime: 2023-02-10 20:20:57
 Description: 本脚本要在Linux系统执行。(因为手懒)
 
 Copyright (c) 2022 by li xueao 11076446+li-xueao@user.noreply.gitee.com, All Rights Reserved. 
@@ -13,7 +13,7 @@ import os
 import pandas as pd
 
 
-update_csv = '/mnt/c/Users/dell/Desktop/团簇数据库_output/simple/Si/DFT_data_screen/dft_data_not_exist.csv'
+update_csv = '/mnt/c/Users/dell/Desktop/团簇数据库_output/simple/Zn2-20/DFT_data_screen/dft_data_not_exist.csv'
 
 db_filename = update_csv.replace("dft_data_not_exist.csv",update_csv.split("/")[-3]+".db")
 
@@ -86,27 +86,31 @@ for row in db.select():
                 N_column = index(key_list, "TOTEN") # KEY在csv文件的列数
                 TOTEN = str(lines1[row.id].split(',')[N_column])+" eV"
                 db.update(row.id, TOTEN=TOTEN)
-            if key == "filename":
+            elif key == "filename":
                 N_column = index(key_list, "filename") # KEY在csv文件的列数
                 filename = str(lines1[row.id].split(',')[N_column])
                 db.update(row.id, filename=filename)
-            if key == "Max_Force":
+            elif key == "Max_Force":
                 N_column = index(key_list, "Max_Force") # KEY在csv文件的列数
                 Max_Force = float(lines1[row.id].split(',')[N_column])
                 db.update(row.id, Max_Force=Max_Force)
-            if key == "N_ele":
+            elif key == "N_ele":
                 N_column = index(key_list, "N_ele") # KEY在csv文件的列数
                 N_ele = int(lines1[row.id].split(',')[N_column])
                 db.update(row.id, N_ele=N_ele)
-            if key == "HOMO_DFT":
+            elif key == "HOMO_DFT":
                 N_column = index(key_list, "HOMO_DFT") # KEY在csv文件的列数
                 HOMO_DFT = float(lines1[row.id].split(',')[N_column])
                 db.update(row.id, HOMO_DFT=HOMO_DFT)
-            if key == "GAP_DFT":
+            elif key == "LUMO_DFT":
+                N_column = index(key_list, "LUMO_DFT") # KEY在csv文件的列数
+                LUMO_DFT = float(lines1[row.id].split(',')[N_column])
+                db.update(row.id, LUMO_DFT=LUMO_DFT)
+            elif key == "GAP_DFT":
                 N_column = index(key_list, "GAP_DFT") # KEY在csv文件的列数
                 GAP_DFT = float(lines1[row.id].split(',')[N_column])
                 db.update(row.id, GAP_DFT=GAP_DFT)
-            if key == "Point_Group":
+            elif key == "Point_Group":
                 N_column = index(key_list, "Point_Group") # KEY在csv文件的列数
                 Point_Group = str(lines1[row.id].split(',')[N_column])
                 db.update(row.id, Point_Group=Point_Group)
