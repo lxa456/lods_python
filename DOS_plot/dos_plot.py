@@ -98,7 +98,7 @@ def save_png(text,save_path):
     plt.xlabel("Energy (eV)",fontsize=15)
     plt.ylabel("Density of States (ev$^{-1}$)",fontsize=15)
     plt.ylim(bottom=0)
-    plt.savefig(save_path,dpi=300,bbox_inches='tight')
+    plt.savefig(save_path,dpi=200,bbox_inches='tight')
     plt.cla()
     
 

@@ -2,10 +2,8 @@
 Author: Xueao Li @ DUT
 Date: 2023-02-10 17:08:12
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-10 20:24:17
-Description: The description of this script.
-
-Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
+LastEditTime: 2023-02-17 11:22:16
+Description: 合并本文件夹下的db文件到DATABASE.db中。
 '''
 ##合并两个ase数据库
 import sqlite3
@@ -13,7 +11,7 @@ from select import select
 import os 
 
 current_path = os.path.dirname(os.path.abspath(__file__))
-file_1 = os.path.join(current_path, 'DATABASE_97.db')
+file_1 = os.path.join(current_path, 'DATABASE.db')
 #database_convert = input("输入被合并的文件名(带后缀)")
 
 def db_name_list():
@@ -22,7 +20,7 @@ def db_name_list():
         for filename in files:
             if filename.endswith('.db'):
                 filename_list.append(filename)
-    filename_list.remove("DATABASE_97.db")
+    filename_list.remove("DATABASE.db")
     #filename_list.remove("Ag.db")
     filename_list.sort()
     return filename_list
