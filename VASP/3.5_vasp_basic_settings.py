@@ -2,7 +2,7 @@
 Author: Xueao Li @ DUT
 Date: 2022-12-20 15:16:55
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-17 14:40:16
+LastEditTime: 2023-02-17 14:44:39
 Description: 统一VASP数据的格式。
 
 Copyright (c) 2022 by li xueao 11076446+li-xueao@user.noreply.gitee.com, All Rights Reserved. 
@@ -28,10 +28,10 @@ db.metadata = {
         {'Reference': ('Reference', 'DOI',''),\
             'TOTEN':('TOTEN','the DFT total energy (useful for comparing clusters with the same number of atoms)','eV'),\
                  'HOMO_DFT':('HOMO_DFT', 'The energy of highest occupied molecular orbital, calculated with DFT','eV'),\
-                     'LUMO_DFT': ('LUMO_DFT', 'The energy of lowest occupied molecular orbital, calculated with DFT', 'eV'),\
+                     'LUMO_DFT': ('LUMO_DFT', 'The energy of lowest unoccupied molecular orbital, calculated with DFT', 'eV'),\
                         'GAP_DFT':('GAP_DFT', 'The HOMO-LUMO Gap, calculated with DFT', 'eV'),\
                              'HOMO_GW':('HOMO_GW', 'The energy of highest occupied molecular orbital, calculated with the GW approximation', 'eV'),\
-                                 'LUMO_GW':('LUMO_GW', 'The energy of lowest occupied molecular orbital, calculated with the GW approximation', 'eV'),\
+                                 'LUMO_GW':('LUMO_GW', 'The energy of lowest unoccupied molecular orbital, calculated with the GW approximation', 'eV'),\
                                     'GAP_GW':('GAP_GW','The HOMO-LUMO Gap, calculated with the GW approximation', 'eV'),\
                                         'Relaxed':('Relaxed','Relaxed', ''), \
                                             'Max_Force':("Max_Force", 'Maximum force for structural relaxation','eV/Ang'),\
