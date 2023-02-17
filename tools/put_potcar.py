@@ -5,7 +5,6 @@ LastEditors: Xueao Li @ DUT
 LastEditTime: 2023-02-10 21:25:37
 Description: 根据各个文件夹中的POSCAR，批量生成对应的POTCAR（linux执行） 
                 批量计算多组分材料时很有用。
-Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
 '''
 import os
 from shutil import copy

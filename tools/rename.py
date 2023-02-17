@@ -2,10 +2,8 @@
 Author: Xueao Li @ DUT
 Date: 2023-02-11 14:57:31
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-12 09:46:10
-Description: The description of this script.
-
-Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
+LastEditTime: 2023-02-17 15:01:01
+Description: Rename the file. 有的文件名有@，用此脚本改名。
 '''
 
 

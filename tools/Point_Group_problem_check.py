@@ -2,10 +2,8 @@
 Author: Xueao Li @ DUT
 Date: 2023-02-11 10:34:27
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-11 10:40:49
-Description: The description of this script.c
-
-Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
+LastEditTime: 2023-02-17 15:00:32
+Description: 计算点群时偶尔有bug，用此脚本查验。
 '''
 def PointGroup(xyz_path) -> str:
         import pymatgen.core as mg

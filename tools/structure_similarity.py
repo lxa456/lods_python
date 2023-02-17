@@ -1,3 +1,11 @@
+'''
+Author: Xueao Li @ DUT
+Date: 2023-02-04 22:09:52
+LastEditors: Xueao Li @ DUT
+LastEditTime: 2023-02-17 15:02:27
+Description: The description of this script.
+
+'''
 ## 检测输入的.xyz文件在DATABASE文件中相同元素和数量的团簇的相似度。
 
 from ase.db import connect
@@ -61,8 +69,8 @@ def similarity(xyz_path, db_path):
 if __name__ == '__main__':
     db = connect('DATABASE.db')
     #similarity(xyz_path)
-    xyz_path1 = r'/home/lxa/structure/xyz_file/C4.xyz'
-    xyz_path2 = r'/home/lxa/structure/xyz_file/C4_1.xyz'
+    xyz_path1 = r''
+    xyz_path2 = r''
     M1 = USR.M_vector(xyz_path1)
     M2 = USR.M_vector(xyz_path2)
     #print(M1)

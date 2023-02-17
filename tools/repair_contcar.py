@@ -2,10 +2,8 @@
 Author: Xueao Li @ DUT
 Date: 2023-02-08 17:43:04
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-11 14:28:54
-Description: The description of this script.
-
-Copyright (c) 2023 by li xueao 1096183069@qq.com, All Rights Reserved. 
+LastEditTime: 2023-02-17 15:01:58
+Description: 改CONTCAR第一行的文件名。
 '''
 import os, sys
 
