@@ -1,4 +1,13 @@
+'''
+Author: Xueao Li @ DUT
+Date: 2023-02-04 22:09:52
+LastEditors: Xueao Li @ DUT
+LastEditTime: 2023-02-19 14:36:06
+Description: The description of this script.
+
+'''
 ## 筛选文件夹，文件夹里存放xyz文件夹，把从中的xyz文件筛选出来放到另一个文件夹。
+## 一般不用这个脚本，只是个举例。
 
 from ase.db import connect
 from ase.atoms import Atoms
