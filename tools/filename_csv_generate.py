@@ -2,8 +2,8 @@
 Author: Xueao Li @ DUT
 Date: 2023-02-17 15:02:52
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-17 15:44:36
-Description: The description of this script.
+LastEditTime: 2023-02-19 14:25:30
+Description: 生成单个文件夹下的文件名的csv文件。（一般不用这个，db2csv.ipynb更好）
 
 '''
 
