@@ -2,7 +2,7 @@
 Author: Xueao Li @ DUT
 Date: 2023-02-10 17:08:12
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-17 11:22:16
+LastEditTime: 2023-02-20 14:56:43
 Description: 合并本文件夹下的db文件到DATABASE.db中。
 '''
 ##合并两个ase数据库
@@ -13,6 +13,13 @@ import os
 current_path = os.path.dirname(os.path.abspath(__file__))
 file_1 = os.path.join(current_path, 'DATABASE.db')
 #database_convert = input("输入被合并的文件名(带后缀)")
+
+def last_id(db_path):
+    from ase.db import connect
+    db = connect(db_path)
+    for row in db.select():
+        last_id = row.id
+    return last_id
 
 def db_name_list():
     filename_list = list()
@@ -37,6 +44,11 @@ for database_convert in db_name_list() :
     c2 = conn2.cursor()
     c1.execute('SELECT id from systems')
     row_num1 = len(c1.fetchall()) #获取DATABASE的行数
+    
+    db1_last_id = last_id(file_1) #获取DATABASE最后的ID
+    # 当DATABASE.db最后的id与它的行数不一致时（原因是手动删掉了中间的某些数据）
+    # 第二个数据库的ID需要从它最后的ID开始，然后再拼在一起。
+
     c2.execute('SELECT id from systems')
     row_num2 = len(c2.fetchall()) #获取被合并的行数
     print('初始db的行数为'+str(row_num1), '被合并db的行数为'+str(row_num2))
@@ -53,11 +65,11 @@ for database_convert in db_name_list() :
     conn2.commit()
     
     for j in range(1,row_num2+1):
-        c2.execute("UPDATE systems set ID="+str(row_num1+j)+" where ID="+str(10000+j))
-        c2.execute("UPDATE keys set id="+str(row_num1+j)+" where id="+str(10000+j))
-        c2.execute("UPDATE species set id="+str(row_num1+j)+" where id="+str(10000+j))
-        c2.execute("UPDATE text_key_values set id="+str(row_num1+j)+" where id="+str(10000+j))
-        c2.execute("UPDATE number_key_values set id="+str(row_num1+j)+" where id="+str(10000 +j))
+        c2.execute("UPDATE systems set ID="+str(db1_last_id+j)+" where ID="+str(10000+j))
+        c2.execute("UPDATE keys set id="+str(db1_last_id+j)+" where id="+str(10000+j))
+        c2.execute("UPDATE species set id="+str(db1_last_id+j)+" where id="+str(10000+j))
+        c2.execute("UPDATE text_key_values set id="+str(db1_last_id+j)+" where id="+str(10000+j))
+        c2.execute("UPDATE number_key_values set id="+str(db1_last_id+j)+" where id="+str(10000 +j))
 
     conn2.commit()
     conn2.close()
