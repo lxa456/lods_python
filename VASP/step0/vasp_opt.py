@@ -1,3 +1,12 @@
+'''
+Author: Xueao Li @ DUT
+Date: 2023-02-20 15:42:19
+LastEditors: Xueao Li @ DUT
+LastEditTime: 2023-02-20 15:53:41
+Description: The description of this script.
+
+'''
+## 注意：使用本脚本前应先使用dir_screen.py筛选出与现有结构库中已经重复的结构，减少不必要的计算。
 ## 一步到位，生成vasp结构优化所有的输入文件。
 ## 需要改的参数：xyz文件夹路径，是否带电，赝势文件不需要改（shell脚本里有）
 
