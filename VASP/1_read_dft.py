@@ -103,7 +103,7 @@ class read_eigenval():
     def HOMO_LUMO_GAP(self) -> float:
         lumo = self.LUMO()
         homo = self.HOMO()
-        return float("%.4f"  %(homo-lumo))
+        return float("%.4f"  %(lumo-homo))
 
 
 class read_xyz():
