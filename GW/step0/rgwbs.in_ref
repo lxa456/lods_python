@@ -1,0 +1,28 @@
+distribute_representations 1
+buffer_size 2.0  
+cache_size  30000
+distribute_wavefunctions 14
+
+lessmemory
+fastselect
+doisdf
+intp_type 3
+num_isdf_points  ??  
+
+no_lda_kernel
+begin tdlda_valence
+range 1 ??  #HOMO
+end tdlda_valence
+begin tdlda_conduction
+range ?? ??  
+end tdlda_conduction
+
+max_number_states ?? 
+static_type 2
+dynamic_energy_resolution 0.005
+energy_data_points 101
+energy_range 10
+begin diag
+range ?? ?? 
+end diag
+

@@ -1,0 +1,29 @@
+# 71-43-2.xyz
+Boundary_Sphere_Radius: ??  
+Grid_Spacing:0.4
+output_all_states .true.
+diag_tolerance 1.d-5
+convergence_criterion 1.d-4
+States_Num:  ??    
+
+coordinate_unit cartesian_ang 
+correlation_type: PBE
+
+Atom_Types_Num: 2
+Atom_Type: C
+Local_component: ??
+
+begin Atom_Coord 
+    0.0000000000    0.0000000000    0.0000000000  
+end Atom_Coord 
+
+Atom_Type: H
+Local_component: ??
+
+begin Atom_Coord 
+    0.0000000000    0.0000000000    0.7456000000 
+    0.7456000000    0.0000000000    0.0000000000 
+    0.0000000000    0.7456000000    0.0000000000 
+    0.2544000000    0.2544000000    0.2544000000 
+end Atom_Coord 
+
