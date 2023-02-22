@@ -1,4 +1,4 @@
-# 需要完成的任务：
+# 步骤
 # 1.将CONTCAR转成 .xyz文件，统一放在一个文件夹里(xyz_relaxed)
 # 2.OUTCAR中需要提取的信息：TOTEN, Max_Force, N_ele
 # 3.EIGENVAL中信息：HOMO_DFT、LUMO_DFT、GAP_DFT 
@@ -18,6 +18,8 @@ def Vasp2xyz(vasp_path, xyz_dir) -> None:
     f1 = open(vasp_path)
     lines = f1.readlines()
     xyz_filename = lines[0].split()[0]
+    if not xyz_filename.endswith(".xyz"):
+        xyz_filename += ".xyz"
     lattice_para_x = float(lines[2].split()[0])
     lattice_para_y = float(lines[3].split()[1])
     lattice_para_z = float(lines[4].split()[2])
@@ -45,6 +47,8 @@ class read_contcar():
         f1 = open(self.contcar_path)
         lines = f1.readlines()
         xyz_filename = lines[0].split()[0]
+        if not xyz_filename.endswith(".xyz"):
+            xyz_filename += ".xyz"
         return xyz_filename
 
 
@@ -87,7 +91,7 @@ class read_eigenval():
     def HOMO(self) -> float:
         f1 = open(self.eigenval_path)
         lines = f1.readlines()
-        print(self.eigenval_path)
+        #print(self.eigenval_path)
         for i in range(8, len(lines)):#这里没有考虑分数占据态，可能以后需要修改。
             #print(float(lines[i].split()[2]))
             if lines[i].split()[2] == "1.000000" or lines[i].split()[2] == "0.500000" or float(lines[i].split()[2]) > 0.8:
@@ -142,7 +146,7 @@ def cut_path(dirname1, n) -> str:
 if __name__ == '__main__':
 
     ## 先CONTCAR -> *.xyz
-    dft_output_path = r"C:\Users\dell\Desktop\团簇数据库_output\binary_dope\4_missing\Mo_at_B10-24\DFT"
+    dft_output_path = r"...\DFT"
     dft_data = dft_output_path.replace("DFT", "DFT_data")
     for root, dirs, files in os.walk(dft_output_path):
         for filename in files:
@@ -151,7 +155,7 @@ if __name__ == '__main__':
                 xyz_dir = os.path.join(cut_path(contcar_path,2).replace("DFT","DFT_data"), "xyz_relaxed")
                 if not os.path.exists(xyz_dir):
                     os.makedirs(xyz_dir)
-                print(root)
+                #print(root)
                 Vasp2xyz(vasp_path=contcar_path,xyz_dir=xyz_dir)
 
 

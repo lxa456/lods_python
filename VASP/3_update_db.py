@@ -2,7 +2,7 @@
 Author: Xueao Li @ DUT
 Date: 2022-12-13 20:20:48
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-10 20:20:57
+LastEditTime: 2023-02-22 15:44:24
 Description: 本脚本要在Linux系统执行。(因为手懒)
 
 Copyright (c) 2022 by li xueao 11076446+li-xueao@user.noreply.gitee.com, All Rights Reserved. 
@@ -13,13 +13,14 @@ import os
 import pandas as pd
 
 
-update_csv = '/mnt/c/Users/dell/Desktop/团簇数据库_output/simple/Zn2-20/DFT_data_screen/dft_data_not_exist.csv'
+update_csv = '.../dft_data_not_exist.csv'
 
-db_filename = update_csv.replace("dft_data_not_exist.csv",update_csv.split("/")[-3]+".db")
+#db_filename = update_csv.replace("dft_data_not_exist.csv",update_csv.split("/")[-3]+".db")
+db_filename = update_csv.replace("dft_info.csv",update_csv.split("/")[-3]+".db")
 
 ## *.db文件中的所有key
 db_key = ["filename", "GAP_DFT","HOMO_DFT","LUMO_DFT","Point_Group"\
-    ,"TOTEN","GAP_GW","HOMO_GW","LUMO_GW","Point_Group", "N_ele", "Max_Force"]
+    ,"TOTEN","GAP_GW","HOMO_GW","LUMO_GW","Point_Group", "N_ele", "Max_Force","Functional"]
 
 ## pd.read_csv 没玩明白，先手动读csv
 f1 = open(update_csv,"r")
@@ -38,12 +39,17 @@ def path_remake(path):
 ## step 1. 按照csv中filename的顺序来convert所有*.xyz 文件成 .db
 xyz_path_list = []
 for name in filename_list:
-    for root, dirs, files in os.walk(update_csv.replace("dft_data_not_exist.csv", 'xyz_relaxed')):
+    n = 0 # 防止重名导致多convert了结构
+    #for root, dirs, files in os.walk(update_csv.replace("dft_data_not_exist.csv", 'xyz_relaxed')):
+    for root, dirs, files in os.walk('/mnt/c/Users/dell/Desktop/database_backups/CdTe/DFT_data'):
         for filename in files:
             if filename == name+".xyz" :
-                xyz_path = os.path.join(root, filename)
-                remake_xyz = path_remake(xyz_path)
-                xyz_path_list.append(remake_xyz)
+                if os.path.join(root, filename) not in xyz_path_list:
+                    n += 1
+                    if n < 2:
+                        xyz_path = os.path.join(root, filename)
+                        remake_xyz = path_remake(xyz_path)
+                        xyz_path_list.append(remake_xyz)
 
 
 convert_cmd = ''
@@ -114,5 +120,9 @@ for row in db.select():
                 N_column = index(key_list, "Point_Group") # KEY在csv文件的列数
                 Point_Group = str(lines1[row.id].split(',')[N_column])
                 db.update(row.id, Point_Group=Point_Group)
+            elif key == "Functional":
+                N_column = index(key_list, "Functional") # KEY在csv文件的列数
+                Functional = str(lines1[row.id].split(',')[N_column])
+                db.update(row.id, Functional=Functional)
         else:
             print(key,"not in db_key! Please check the KEY in csv file!!!")
