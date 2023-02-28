@@ -2,7 +2,7 @@
 Author: Xueao Li @ DUT
 Date: 2023-02-04 22:09:52
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-17 15:02:27
+LastEditTime: 2023-02-28 19:13:13
 Description: The description of this script.
 
 '''
@@ -60,7 +60,7 @@ def similarity(xyz_path, db_path):
     if A == None: #or M2 == None:
         return "this structure not in database now!"
     else:
-        return max(similarity_list)
+        return max(similarity_list) #返回最大相似度的值。
 
 
 
