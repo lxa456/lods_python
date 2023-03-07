@@ -2,7 +2,7 @@
 Author: Xueao Li @ DUT
 Date: 2023-02-04 22:09:52
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-28 19:13:13
+LastEditTime: 2023-03-01 09:41:31
 Description: The description of this script.
 
 '''
@@ -69,8 +69,8 @@ def similarity(xyz_path, db_path):
 if __name__ == '__main__':
     db = connect('DATABASE.db')
     #similarity(xyz_path)
-    xyz_path1 = r''
-    xyz_path2 = r''
+    xyz_path1 = r'C:\Users\dell\Desktop\团簇数据库_output\lods_python\tools\de-duplication\Pt5Sn5\3856_Pt5-Sn5-1.xyz'
+    xyz_path2 = r'C:\Users\dell\Desktop\团簇数据库_output\lods_python\tools\de-duplication\Pt5Sn5\3855_Pt5-Sn5-0.xyz'
     M1 = USR.M_vector(xyz_path1)
     M2 = USR.M_vector(xyz_path2)
     #print(M1)
