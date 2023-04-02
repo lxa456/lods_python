@@ -4,7 +4,8 @@ import numpy as np
 import os 
 import xml
 from shutil import copy
-
+from pymatgen.io.vasp.inputs import Poscar
+from pymatgen.core.structure import Molecule
 
 class FormatsConversion:
 
@@ -243,6 +244,16 @@ class FormatsConversion:
                             (float(coord[j][1])/boundary[1]+y_move)*(max[1]-min[1])+yr/2,\
                                 (float(coord[j][2])/boundary[2]+z_move)*(max[2]-min[2])+zr/2))
             
+    def Xyz2Vasp(xyz_path, vasp_path, lattice_para: float):
+        mol1 = Molecule.from_file(xyz_path)
+
+        # Set the lattice vector to None, indicating it is a Molecule object
+        mol1 = mol1.copy()
+        # Convert the Molecule object to a Structure object
+        struct1 = mol1.get_boxed_structure(a=lattice_para,b=lattice_para,c=lattice_para)
+        poscar = Poscar(struct1)
+        poscar.write_file(vasp_path)
+
 
     def Xyz_repair(xyz_path):
         f1 = open(xyz_path)        
