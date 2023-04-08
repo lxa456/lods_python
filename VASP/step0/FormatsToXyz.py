@@ -142,6 +142,22 @@ class FormatsConversion:
             xyz.write(str(len(atom_name))+'\n')
             for i in range(len(atom_name)):
                 xyz.write("\n%s  %9.9f   %9.9f   %9.9f"%(atom_name[i],coord_x[i],coord_y[i],coord_z[i]))
+    
+    def ase_cif2xyz(cif_path: str, xyz_path: str) -> None:
+        '''Using ASE to convert cif file to xyz file。
+        当文件名中有"@"时会有bug，
+        所以转换时将"@"转换为"_at_"'''
+        from ase.io import read, write
+        if "@" in cif_path:
+            new_cif_path = cif_path.replace("@", "_at_")
+            copy(cif_path, new_cif_path)
+        if "@" in xyz_path:
+            new_xyz_path = xyz_path.replace("@", "_at_")      
+        # 从CIF文件中读取晶体结构
+        structure = read(new_cif_path)
+        # 将晶体结构写入XYZ文件
+        write(new_xyz_path, structure)
+        os.remove(new_cif_path)
 
     def DelteErrorCodes(path): ## 暂时没想到好办法，先用穷举法。
         '''部分xsd文件中有乱码，调用本函数删除乱码。'''
@@ -336,7 +352,7 @@ if __name__=="__main__":
                 if not os.path.exists(xyz_path):
                     os.makedirs(xyz_path)
                 xyz_file = os.path.join(xyz_path, filename.split('.')[-2]+'.xyz')
-                FormatsConversion.CifToXyz(cif_path, xyz_file)
+                FormatsConversion.CifToXyz(cif_path, xyz_file) #此处可改用ASE的方法
 
             else: ## 将原有.xyz文件和.pdf复制到新文件夹中
                 source_path = os.path.join(root, filename)
