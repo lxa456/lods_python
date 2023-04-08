@@ -2,7 +2,7 @@
 
 import os 
 import numpy as np 
-
+from pymatgen.core.structure import Molecule
 
 class USR:
 
@@ -34,6 +34,11 @@ class USR:
                 for j in range(3):
                     coord[n][j] = float(lines[n].split()[j+1])   
                 n+=1         
+        return coord
+
+    def read_pymatgen_Molecule(molecule):
+        coord = molecule.cart_coords.tolist()
+        coord = np.array(coord)
         return coord
 
     def ctd(struc):
@@ -87,9 +92,7 @@ class USR:
         atom_num = struc.shape[0]
         for i in range(atom_num):
             position_i = struc[i]
-            #print('test')
             distance = USR.distance(position1,position_i)
-            #print(distance)
             distance_list.append(distance)
             if 0 in distance_list:
                 distance_list.remove(0)
@@ -103,10 +106,10 @@ class USR:
     def M_vector(path_or_struc):
         if type(path_or_struc) == np.ndarray:
             struc = path_or_struc
-        else:
+        elif type(path_or_struc) == str:
             struc = USR.read_xyz(path_or_struc)
-
-        atom_num = struc.shape[0]
+        elif type(path_or_struc) == Molecule:
+            struc = USR.read_pymatgen_Molecule(path_or_struc)
 
         ctd_position = USR.ctd(struc) ## 分子中心 
         cst_position = USR.Nearest_distance(ctd_position,struc) ## 距离ctd最近的原子
@@ -155,10 +158,19 @@ class USR:
 
 
 if __name__ == '__main__': ## 使用方法
-    xyz_path1 = r''
-    struc_A = USR.read_xyz(xyz_path1)
-    xyz_path2 = r''
-    struc_B = USR.read_xyz(xyz_path2)   
-    M1 = USR.M_vector(struc_A)
-    M2 = USR.M_vector(struc_B)
+    #xyz_path1 = r''
+    #struc_A = USR.read_xyz(xyz_path1)
+    #xyz_path2 = r''
+    #struc_B = USR.read_xyz(xyz_path2)   
+
+    from pymatgen.core.structure import Molecule
+    from ase import Atoms
+    from pymatgen.io.ase import AseAtomsAdaptor
+    from pymatgen.symmetry.analyzer import PointGroupAnalyzer
+    ase_atoms = Atoms('H2O', positions=[[0,0,0],[0,0,1],[0,1,0]])
+    mol = AseAtomsAdaptor.get_molecule(ase_atoms)
+    # 可以读取Molecule类
+    M1 = USR.M_vector(mol)
+    M2 = USR.M_vector(mol)
     print(USR.similarity(M1,M2))
+    
