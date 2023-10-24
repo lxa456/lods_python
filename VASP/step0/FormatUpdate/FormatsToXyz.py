@@ -34,11 +34,8 @@ class FormatsConversion:
         file_xyz = open(xyz_path, "w+")
         atoms = dmol.read_dmol_car(car_path)
         filename = os.path.basename(car_path)
-        xyz.write_xyz(file_xyz, [atoms], \
-                      comment="%s %s" %(filename, atoms.symbols)) 
-                        #xyz文件的注释为：文件名 化学式
+        xyz.write_xyz(file_xyz, [atoms], comment=filename)
 
-    # to be updated!
     def XsdToXyz(xsd_path, xyz_path):
         '''.xsd文件转换为.xyz文件'''
         xmldom = xml.dom.minidom.parse(xsd_path)  #读取文件路径
@@ -69,7 +66,6 @@ class FormatsConversion:
                 coord_z = float(coord[2])
                 xyz.write("\n%s  %9.9f   %9.9f   %9.9f"%(atom_name,coord_x,coord_y,coord_z))
 
-    # to be updated!
     def MolToXyz(mol_path, xyz_path):
         '''.mol文件转换为.xyz文件'''
         f1 = open(mol_path)

@@ -2,7 +2,7 @@
 Author: Xueao Li @ DUT
 Date: 2023-02-10 17:08:12
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-20 14:56:43
+LastEditTime: 2023-10-24 20:52:42
 Description: 合并本文件夹下的db文件到DATABASE.db中。
 '''
 ##合并两个ase数据库
@@ -14,14 +14,14 @@ current_path = os.path.dirname(os.path.abspath(__file__))
 file_1 = os.path.join(current_path, 'DATABASE.db')
 #database_convert = input("输入被合并的文件名(带后缀)")
 
-def last_id(db_path):
+def last_id(db_path: str) -> int:
     from ase.db import connect
     db = connect(db_path)
     for row in db.select():
         last_id = row.id
     return last_id
 
-def db_name_list():
+def db_name_list() -> list:
     filename_list = list()
     for root, dirs ,files in os.walk(current_path):
         for filename in files:

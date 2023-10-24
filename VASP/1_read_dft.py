@@ -14,7 +14,7 @@ import os
 import pandas as pd 
 
 
-def Vasp2xyz(vasp_path, xyz_dir) -> None:
+def Vasp2xyz(vasp_path: str, xyz_dir: str) -> None:
     f1 = open(vasp_path)
     lines = f1.readlines()
     xyz_filename = lines[0].split()[0]
@@ -41,7 +41,7 @@ def Vasp2xyz(vasp_path, xyz_dir) -> None:
 
 
 class read_contcar():
-    def __init__(self, contcar_path) -> None:
+    def __init__(self, contcar_path: str) -> None:
         self.contcar_path = contcar_path
     def filename(self) -> str:
         f1 = open(self.contcar_path)
@@ -53,7 +53,7 @@ class read_contcar():
 
 
 class read_outcar():
-    def __init__(self, outcar_path) -> None:
+    def __init__(self, outcar_path: str) -> None:
         self.outcar_path = outcar_path
     def F_max(self) -> float:
         f1 = open(self.outcar_path)
@@ -86,7 +86,7 @@ class read_outcar():
         return NELECT
 
 class read_eigenval():
-    def __init__(self, eigenval_path) -> None:
+    def __init__(self, eigenval_path: str) -> None:
         self.eigenval_path = eigenval_path
     def HOMO(self) -> float:
         f1 = open(self.eigenval_path)
@@ -111,7 +111,7 @@ class read_eigenval():
 
 
 class read_xyz():
-    def __init__(self,xyz_path) -> None:
+    def __init__(self, xyz_path: str) -> None:
         self.xyz_path = xyz_path
     def PointGroup(self) -> str:
         import pymatgen.core as mg
@@ -129,7 +129,7 @@ class read_xyz():
         filename = self.xyz_path.split('\\')[-1]
         return filename.split(".")[0]
 
-def cut_path(dirname1, n) -> str: 
+def cut_path(dirname1: str, n: int) -> str: 
     '''剪切路径，如：
     dirname1:"C:\\Users\\dell\\Desktop\\团簇数据库_output\\simple\\Ag\\DFT\\Ag7-20-\\13\\CONTCAR",
     n = 2.  

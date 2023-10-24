@@ -354,6 +354,7 @@ if __name__=="__main__":
                 if not os.path.exists(xyz_path):
                     os.makedirs(xyz_path)
                 xyz_file = os.path.join(xyz_path, filename.split('.')[-2]+'.xyz')
+                
                 FormatsConversion.CarToXyz(car_path, xyz_file)
 
             elif filename.endswith('.msi'): # 只匹配后缀名为'.msi'的文件

@@ -2,7 +2,7 @@
 Author: Xueao Li @ DUT
 Date: 2022-12-13 20:20:48
 LastEditors: Xueao Li @ DUT
-LastEditTime: 2023-02-22 15:44:24
+LastEditTime: 2023-10-24 20:51:42
 Description: 本脚本要在Linux系统执行。(因为手懒)
 
 Copyright (c) 2022 by li xueao 11076446+li-xueao@user.noreply.gitee.com, All Rights Reserved. 
@@ -33,7 +33,7 @@ filename_list = []
 [filename_list.append(lines1[i].strip().split(",")[0]) for i in range(1, len(lines1))]
 
 
-def path_remake(path):
+def path_remake(path: str):
     return path.replace(' ', '\ ').replace('(','\(').replace(')','\)').replace('&','\&')
 
 ## step 1. 按照csv中filename的顺序来convert所有*.xyz 文件成 .db
@@ -64,7 +64,7 @@ os.system("ase convert "+convert_cmd+db_filename)
 db = connect(db_filename)
 ## step 2. 按row.id更新db中的keys and values
 
-def index(list, value) -> int:
+def index(list: list, value: str) -> int:
     """输入list和它包含的元素，
     返回该元素的序号（当然是从0开始）"""
     assert value in list, "value不在list中！"
@@ -76,7 +76,7 @@ def index(list, value) -> int:
             i+=1
 
 
-def update_Sequential(db_file, key, value_list):
+def update_Sequential(db_file: str, key, value_list):
     '''not finished'''
     db = connect(db_file)
     for row in db.select():

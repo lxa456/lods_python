@@ -2,4 +2,7 @@
 
 *.db
 *.xyz
+*.mol
+*.car
+*.xsd
 *.pyc
